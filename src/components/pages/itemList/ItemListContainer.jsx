@@ -1,10 +1,27 @@
+import { useEffect, useState } from 'react';
+import { products } from '../../../productMock';
+import ItemList from './ItemList';
+
 import './ItemListContainer.css';
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
+
+    const [items, setItems] = useState([])
+//    const [error, setError] = useState({})
+
+    useEffect(() => {
+        const tarea = new Promise((resolve, /* reject */) => {
+            resolve(products);
+            // reject 
+        });
+
+        tarea
+            .then((respuesta) => setItems(respuesta))
+//            .catch((error) => setError(error));
+    }, []);
+
     return (
-        <div className="item-list-container">
-        <h2 className="greeting">{greeting}</h2>
-        </div>
+        < ItemList items={items} />
     );
 }
 
