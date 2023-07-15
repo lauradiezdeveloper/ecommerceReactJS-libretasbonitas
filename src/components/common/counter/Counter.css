@@ -1,0 +1,28 @@
+.counter {
+    display: flex;
+    align-items: center;
+}
+
+.counter button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #B3B6A5;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.counter h3 {
+    font-size: 18px;
+    margin: 0 10px;
+}
+
+.counter button:hover {
+    background-color: #6e7066;
+}
+
+.counter button:disabled {
+    background-color: #f1f1f1;
+    cursor: not-allowed;
+}

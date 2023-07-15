@@ -3,17 +3,19 @@
     padding: 10px;
 }
 
-.nav-menu {
+.category {
     display: flex;
     justify-content: center;
-    list-style: none;
     padding: 0;
 }
 
 .nav-item {
     margin-right: 10px;
     cursor: pointer;
+    text-decoration: none;
+    color: rgb(92, 92, 92);
 }
+
 
 .nav-item:hover {
     color: #B3B6A5;
