@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
-import CounterContainer from "../../common/counter/CounterContainer";
-import { products } from "../../../productsMock";
+import { products } from "../../../productMock";
 import { useParams } from "react-router-dom";
+import ItemDetail from "./ItemDetail";
 
-
-const ItemDetail = () => {
-    const [producto, setProducto] = useState({});
+const ItemDetailContainer = () => {
+    const [product, setProduct] = useState({});
 
     const {id} = useParams()
 
 
     useEffect(() => {
-        let productoSeleccionado = products.find((elemento) => elemento.id === +id);
-        const tarea = new Promise((res, /* rej */) => {
-        res(productoSeleccionado)
+        let productSelected = products.find((element) => element.id === +id);
+        const task = new Promise((res, /* rej */) => {
+        res(productSelected)
         });
-        tarea.then(res => setProducto(res) )
+        task.then(res => setProduct(res) )
 
     }, [id]);
 
     const onAdd = (cantidad) => {
-        console.log(producto);
+        console.log(product);
         console.log(cantidad);
     };
 
     return (
-        <div>
-        <h2>{producto.title}</h2>
-        <h4>{producto.price}</h4>
 
-        <CounterContainer stock={producto.stock} onAdd={onAdd} />
-        </div>
+    <div>
+        <ItemDetail product={product} onAdd={onAdd} />
+    </div>
     );
 };
 
-export default ItemDetail;
+export default ItemDetailContainer;
