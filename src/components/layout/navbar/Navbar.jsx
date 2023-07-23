@@ -1,11 +1,11 @@
 import "./Navbar.css"
-import Cart from "../../common/cartWidget/CartWidget"
+import CartWidget from "../../common/cartWidget/CartWidget"
 import SubNavbar from "./subNavbar/SubNavbar"
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PersonIcon from '@mui/icons-material/Person';
 import { Link } from "react-router-dom";
+import LoginWidget from "../../common/loginWidget/LoginWidget";
 
 const Navbar = () => {
     return (
@@ -17,9 +17,9 @@ const Navbar = () => {
                     </div>
                     <div className="icons-container">
                         <SearchIcon className="icon" />
-                        <PersonIcon className="icon" />
+                        <LoginWidget />
                         <FavoriteIcon className="icon" />
-                        <Cart />
+                        <CartWidget />
                     </div>
                 </section>
                 <SubNavbar />
