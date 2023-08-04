@@ -7,22 +7,18 @@ const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     // Agregar un producto al carrito
-    const addToCart = (item)=>{
-
+    const addToCart = (item) => {
         const productExists = isInCart(item.id);
+        
+        const addQuantity = productExists
+            ? cart.map((elemento) =>
+                elemento.id === item.id
+                    ? { ...elemento, quantity: elemento.quantity + item.quantity }
+                    : elemento
+            )
+            : [...cart, item];
 
-        if (productExists) {
-            let addQuantity = cart.map((elemento) => {
-                if (elemento.id === item.id) {
-                    return { ...elemento, quantity: elemento.quantity + item.quantity };
-                } else {
-                    return elemento;
-                }
-                });
-            setCart(addQuantity);
-        } else {
-        setCart( [...cart, item] )
-        }
+        setCart(addQuantity);
     };
 
     // Limpiar todo el carrito
@@ -42,7 +38,30 @@ const CartContextProvider = ({ children }) => {
         return exist
     }
 
-    let data = { cart, addToCart, clearCart, deleteById };
+    // Calcular el precio total del carrito
+    const getTotalPrice = () =>{
+        let total = cart.reduce((acc, elemento)=>{
+            return acc + (elemento.price * elemento.quantity)
+        }, 0)
+        return total
+    };
+
+    // Calcular la cantidad de items del carrito
+    const getTotalQuantity = ()=>{
+        let total = cart.reduce( (acc, elemento)=>{
+            return acc +  elemento.quantity
+        }, 0)
+        return total
+    };
+
+    // Calcular la cantidad de productos por id
+    const getQuantityById = (id)=>{
+        const product = cart.find( (elemento)=> elemento.id === id)
+        return product?.quantity
+    };
+
+
+    let data = { cart, addToCart, clearCart, deleteById, getTotalPrice, getTotalQuantity, getQuantityById };
 
     return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
 }

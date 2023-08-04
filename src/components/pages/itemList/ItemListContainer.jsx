@@ -1,10 +1,10 @@
+import './ItemListContainer.css';
 import { useEffect, useState } from 'react';
-import { products } from '../../../productMock';
 import ItemList from './ItemList';
 import { useParams } from "react-router-dom";
+import { db } from '../../../firebaseConfig';
+import { getDocs, collection, query, where } from "firebase/firestore"
 
-
-import './ItemListContainer.css';
 
 const ItemListContainer = () => {
 
@@ -14,17 +14,18 @@ const ItemListContainer = () => {
     const { categoryName } = useParams();
 
     useEffect(() => {
-    let productsFiltrados = products.filter(
-        (elemento) => elemento.category === categoryName
-    );
-    const tarea = new Promise((resolve, /* reject */) => {
-        resolve(categoryName === undefined ? products : productsFiltrados);
-        //   reject({message: "No autorizado", status: 401})
-    });
+        let productsCollection = collection(db, "products");
+        let productCategory;
 
-    tarea
-        .then((respuesta) => setItems(respuesta))
-        // .catch((error) => setError(error));
+        productCategory = categoryName ? query(productsCollection, where("category", "==", categoryName)) : productsCollection;
+        
+        getDocs(productCategory).then((res)=>{
+            let products = res.docs.map ( doc => {
+                return{...doc.data(), id: doc.id}
+            });
+            setItems(products)
+        });
+
     }, [categoryName]);
 
     return <ItemList items={items} />;
