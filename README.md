@@ -41,8 +41,4 @@ npm run dev
 4. Visit [http://localhost:3000](http://localhost:3000) in your web browser to view the website.
 
 
-## License 📄
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 🚀 Happy Shopping with LibretasBonitas.com! 🚀
