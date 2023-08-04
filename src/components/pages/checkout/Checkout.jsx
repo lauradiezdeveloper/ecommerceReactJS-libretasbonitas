@@ -1,10 +1,16 @@
 import { TextField } from "@mui/material"
 import "./Checkout.css"
 
-const Checkout = ({ handleSubmit, handleChange, errors }) => {
+const Checkout = ({ handleSubmit, handleChange, errors, orderId  }) => {
     return (
         <div className="checkout-container">
         <h1>Checkout</h1>
+        <div> {orderId ? (
+        <div>
+            <h3>Gracias por su compra</h3>
+            <h4>Su id de compra es: {orderId}</h4>
+        </div>
+        ) : (
         <form onSubmit={(handleSubmit)} className="checkout-form">
             <TextField 
                 type="text" 
@@ -43,8 +49,11 @@ const Checkout = ({ handleSubmit, handleChange, errors }) => {
                 helperText={errors.phoneNumber} 
                 onChange={handleChange} />
             <button type="submit">Seleccionar método de pago</button>
-        </form></div>
-    )
-}
+        </form>
+    )}
+    </div>
+    </div>
+  );
+};
 
 export default Checkout

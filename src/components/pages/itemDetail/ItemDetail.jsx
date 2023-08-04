@@ -11,7 +11,13 @@ const ItemDetail = ({ product, onAdd }) => {
             <h2>{product.title}</h2>
             <p>{product.description}</p>
             <h4>{product.price}</h4>
-            <CounterContainer stock={product.stock} onAdd={onAdd} />
+
+            {product.stock > 0 ? ( 
+                <CounterContainer stock={product.stock} onAdd={onAdd} />
+            ) : (
+                <h5>Oh! No nos queda stock</h5>
+            )}
+            
         </div>
         </div>
     );
